@@ -1,0 +1,43 @@
+{
+  // Typecheck config for tools/typecheck.ps1 — NOT used by the Cocos build.
+  //
+  // Mirrors temp/tsconfig.cocos.json (which the editor regenerates, so it must
+  // not be hand-edited) with three deliberate differences:
+  //
+  //   * skipLibCheck  — the engine's own cc.d.ts / jsb.d.ts do not typecheck
+  //     cleanly on their own (ambient const enums, unresolved `pal/*` modules,
+  //     WebGPU globals). The editor never checks them either. Without this the
+  //     real errors are buried under ~500 lines of engine noise.
+  //   * types         — absolute-from-root paths. The `./temp/...` entries in
+  //     the generated config resolve relative to *that file's* directory
+  //     (temp/), so they only work when tsc is launched the way the editor
+  //     launches it.
+  //   * strict:false  — matches the root tsconfig.json override.
+  //
+  // Keep `include` limited to assets/: temp/ and library/ hold generated code.
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "strict": false,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": [],
+    "types": [],
+    "baseUrl": "..",
+    "paths": {
+      "db://assets/*": ["assets/*"]
+    }
+  },
+  "files": [
+    "../temp/declarations/cc.d.ts",
+    "../temp/declarations/cc.env.d.ts",
+    "../temp/declarations/cc.custom-macro.d.ts",
+    "../temp/declarations/jsb.d.ts"
+  ],
+  "include": ["../assets/**/*.ts"],
+  "exclude": ["../temp", "../library", "../build", "../node_modules"]
+}

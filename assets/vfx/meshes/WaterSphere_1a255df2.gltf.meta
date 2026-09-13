@@ -1,0 +1,80 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "d6328ecf-9278-4bb1-8856-c44352fe4dc4",
+  "files": [],
+  "subMetas": {
+    "93a92": {
+      "importer": "gltf-mesh",
+      "uuid": "d6328ecf-9278-4bb1-8856-c44352fe4dc4@93a92",
+      "displayName": "",
+      "id": "93a92",
+      "name": "WaterSphere_1a255df2.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1520
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ba4e7": {
+      "importer": "gltf-scene",
+      "uuid": "d6328ecf-9278-4bb1-8856-c44352fe4dc4@ba4e7",
+      "displayName": "",
+      "id": "ba4e7",
+      "name": "WaterSphere_1a255df2.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "d6328ecf-9278-4bb1-8856-c44352fe4dc4@93a92"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "d6328ecf-9278-4bb1-8856-c44352fe4dc4@ba4e7"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "aa14346a-2dc2-463d-9066-69bfc16e997f",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "aa14346a-2dc2-463d-9066-69bfc16e997f@6c48a",
+      "displayName": "S_Ic_Item_Armor_Mage_Helmet",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "aa14346a-2dc2-463d-9066-69bfc16e997f",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "aa14346a-2dc2-463d-9066-69bfc16e997f@f9941",
+      "displayName": "S_Ic_Item_Armor_Mage_Helmet",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": -0.5,
+        "trimX": 4,
+        "trimY": 10,
+        "width": 120,
+        "height": 109,
+        "rawWidth": 128,
+        "rawHeight": 128,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -60,
+            -54.5,
+            0,
+            60,
+            -54.5,
+            0,
+            -60,
+            54.5,
+            0,
+            60,
+            54.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            4,
+            118,
+            124,
+            118,
+            4,
+            9,
+            124,
+            9
+          ],
+          "nuv": [
+            0.03125,
+            0.0703125,
+            0.96875,
+            0.0703125,
+            0.03125,
+            0.921875,
+            0.96875,
+            0.921875
+          ],
+          "minPos": [
+            -60,
+            -54.5,
+            0
+          ],
+          "maxPos": [
+            60,
+            54.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "aa14346a-2dc2-463d-9066-69bfc16e997f@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "aa14346a-2dc2-463d-9066-69bfc16e997f@6c48a"
+  }
+}

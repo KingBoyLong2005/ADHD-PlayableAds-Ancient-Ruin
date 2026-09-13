@@ -1,0 +1,70 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "97996fcb-da72-4567-b294-3bfac45da239",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {},
+    {}
+  ],
+  "_states": [
+    {},
+    {}
+  ],
+  "_props": [
+    {
+      "mainTexture": {
+        "__uuid__": "b12bf628-f488-47fa-913d-e51197175530@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "colorId": 0,
+      "lightStrength": 0,
+      "smoothness": 0.24,
+      "useAlphaMask": 0,
+      "fakeShadow": 0,
+      "shadowMaxHeight": 0.15,
+      "alphaThreshold": 0.5,
+      "tint": {
+        "__type__": "cc.Color",
+        "r": 145,
+        "g": 140,
+        "b": 111,
+        "a": 255
+      },
+      "colorEasy": {
+        "__type__": "cc.Color",
+        "r": 249,
+        "g": 202,
+        "b": 116,
+        "a": 255
+      },
+      "colorMedium": {
+        "__type__": "cc.Color",
+        "r": 145,
+        "g": 201,
+        "b": 170,
+        "a": 255
+      },
+      "colorHard": {
+        "__type__": "cc.Color",
+        "r": 136,
+        "g": 39,
+        "b": 39,
+        "a": 0
+      },
+      "tilingOffset": {
+        "__type__": "cc.Vec4",
+        "x": 2,
+        "y": 4,
+        "z": 0,
+        "w": 0
+      }
+    },
+    {}
+  ]
+}

@@ -1,0 +1,218 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Paper_FOW.shadergraph
+// Fog-of-war ground shader driven by a top-down mask RenderTexture.
+// Graph logic:
+//   worldXZ   = (worldPos.x, worldPos.z)
+//   baseUV    = worldXZ * _Tiling_offset.xy + _Tiling_offset.zw
+//   maskUV    = (worldXZ - _Cam_RT_Pos) / (_OthorSize * 2) + 0.5
+//   invMask   = 1 - SampleTexture2D(_MaskRT, maskUV)
+//   alpha     = invMask.r + (SimpleNoise(uv0, 99.6) - 0.5) * 0.5      (clipped by _alpha_clipping)
+//   t1        = step(invMask, _offset + _edge)   * step(_edge, invMask)
+//   t2        = step(invMask, _offset_1 + _edge_1) * step(_edge_1, invMask)
+//   BaseColor = lerp(lerp(baseTex * _Light_strength, edgeColor1, t1), edgeColor2, t2)
+//   NormalTS  = NormalStrength(SampleTexture2D(_Normal_Map, baseUV), _Normal_strength)
+// Added on top of the graph: a static coverage mask so a single large plane can stand
+// in for the per-tile fog planes. shapeUV = (worldXZ - _MapRect.xy) / _MapRect.zw;
+// white keeps the fragment, black discards it. The baked mask is white outside the
+// playable rooms and black over them, so the plane fogs the void and cuts a hole where
+// the map is. Default shapeMask is white, which keeps the original behaviour.
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: standard-vs
+      frag: standard-fs
+      properties: &props
+        baseMap:        { value: grey, editor: { displayName: Base Map } }
+        normalMap:      { value: normal, editor: { displayName: Normal Map } }
+        maskMap:        { value: white, editor: { displayName: Mask RT } }
+        shapeMask:      { value: white, editor: { displayName: Shape Mask (white = fog, black = hole) } }
+        tilingOffset:   { value: [1.0, 1.0, 0.0, 0.0], editor: { displayName: Tiling Offset } }
+        normalTiling:   { value: [0.0, 0.0, 0.0, 0.0], editor: { displayName: Normal Tiling (0 = theo Tiling Offset) } }
+        camRTPos:       { value: [0.0, 0.0, 0.0, 0.0], editor: { displayName: Cam RT Pos (xy) } }
+        mapRect:        { value: [0.0, 0.0, 1.0, 1.0], editor: { displayName: Map Rect (min.xz, size.xz) } }
+        orthoSize:      { value: 1.0, target: params.x, editor: { displayName: Ortho Size } }
+        lightStrength:  { value: 1.0, target: params.y, editor: { displayName: Light Strength, slide: true, range: [0, 4], step: 0.001 } }
+        normalStrength: { value: 1.0, target: params.z, editor: { displayName: Normal Strength, slide: true, range: [0, 5], step: 0.001 } }
+        alphaThreshold: { value: 0.94, target: params.w, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1], step: 0.001 } }
+        edge:           { value: 0.41, target: params2.x, editor: { slide: true, range: [0, 1], step: 0.001 } }
+        offset:         { value: 0.5, target: params2.y, editor: { slide: true, range: [0, 1], step: 0.001 } }
+        edge1:          { value: 0.41, target: params2.z, editor: { displayName: Edge (1), slide: true, range: [0, 1], step: 0.001 } }
+        offset1:        { value: 0.5, target: params2.w, editor: { displayName: Offset (1), slide: true, range: [0, 1], step: 0.001 } }
+        smoothness:     { value: 0.5, target: params3.x, editor: { slide: true, range: [0, 1], step: 0.001 } }
+        noiseScale:     { value: 99.6, target: params3.y, editor: { displayName: Noise Scale } }
+        edgeColor1:     { value: [0.441509, 0.441509, 0.441509, 0.0], editor: { type: color } }
+        edgeColor2:     { value: [0.441509, 0.441509, 0.441509, 0.0], editor: { type: color } }
+    - &shadow-caster
+      vert: shadow-caster-vs
+      frag: shadow-caster-fs
+      phase: shadow-caster
+      propertyIndex: 0
+      rasterizerState:
+        cullMode: front
+}%
+
+CCProgram shared-ubos %{
+  uniform Constants {
+    vec4 tilingOffset;
+    vec4 camRTPos;
+    vec4 params;   // x: orthoSize, y: lightStrength, z: normalStrength, w: alphaThreshold
+    vec4 params2;  // x: edge, y: offset, z: edge1, w: offset1
+    vec4 params3;  // x: smoothness, y: noiseScale
+    vec4 edgeColor1;
+    vec4 edgeColor2;
+    vec4 mapRect;      // xy: footprint min (world XZ), zw: footprint size (world XZ)
+    vec4 normalTiling; // rieng cho normal map; xy == 0 thi dung tilingOffset
+  };
+}%
+
+CCProgram macro-remapping %{
+  #pragma define-meta USE_TWOSIDE
+  #pragma define-meta USE_ALPHA_TEST
+  #define CC_SURFACES_USE_TWO_SIDED USE_TWOSIDE
+  #define CC_SURFACES_USE_TANGENT_SPACE 1
+}%
+
+CCProgram surface-fragment %{
+  uniform sampler2D baseMap;
+  uniform sampler2D normalMap;
+  uniform sampler2D maskMap;
+  uniform sampler2D shapeMask;
+
+  // ---- Unity_SimpleNoise ----
+  float NoiseRandomValue(vec2 uv) { return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453); }
+  float NoiseInterpolate(float a, float b, float t) { return (1.0 - t) * a + t * b; }
+  float ValueNoise(vec2 uv)
+  {
+    vec2 i = floor(uv);
+    vec2 f = fract(uv);
+    f = f * f * (3.0 - 2.0 * f);
+    float r0 = NoiseRandomValue(i);
+    float r1 = NoiseRandomValue(i + vec2(1.0, 0.0));
+    float r2 = NoiseRandomValue(i + vec2(0.0, 1.0));
+    float r3 = NoiseRandomValue(i + vec2(1.0, 1.0));
+    return NoiseInterpolate(NoiseInterpolate(r0, r1, f.x), NoiseInterpolate(r2, r3, f.x), f.y);
+  }
+  float SimpleNoise(vec2 uv, float scale)
+  {
+    float t = 0.0;
+    t += ValueNoise(vec2(uv.x * scale / 1.0, uv.y * scale / 1.0)) * 0.125;
+    t += ValueNoise(vec2(uv.x * scale / 2.0, uv.y * scale / 2.0)) * 0.25;
+    t += ValueNoise(vec2(uv.x * scale / 4.0, uv.y * scale / 4.0)) * 0.5;
+    return t;
+  }
+
+  vec2 FOWWorldXZ() { return vec2(FSInput_worldPos.x, FSInput_worldPos.z); }
+  vec2 FOWBaseUV()  { return FOWWorldXZ() * tilingOffset.xy + tilingOffset.zw; }
+  vec2 FOWMaskUV()  { return (FOWWorldXZ() - camRTPos.xy) / (params.x * 2.0) + 0.5; }
+
+  // The normal map is crumpled paper: its creases are large features that read as long
+  // streaks once the base tiling is stretched for a big-paper look. Giving it its own
+  // tiling lets the creases stay fine-grained independently of the albedo scale.
+  // normalTiling.xy == 0 falls back to the base UV, so old materials are unaffected.
+  vec2 FOWNormalUV()
+  {
+    if (normalTiling.x == 0.0 && normalTiling.y == 0.0) return FOWBaseUV();
+    return FOWWorldXZ() * normalTiling.xy + normalTiling.zw;
+  }
+
+  float FOWInvMask() { return 1.0 - texture(maskMap, FOWMaskUV()).r; }
+
+  // Where the fog plane is allowed to draw, baked to a texture. Sampled outside [0,1]
+  // it clamps to the border pixel, which is white, so the fog keeps covering past the
+  // texture edge instead of popping a hole there.
+  vec2  FOWShapeUV() { return (FOWWorldXZ() - mapRect.xy) / max(mapRect.zw, vec2(1e-4)); }
+  float FOWShape()   { return texture(shapeMask, FOWShapeUV()).r; }
+
+  float FOWAlpha()
+  {
+    return FOWInvMask() + (SimpleNoise(FSInput_texcoord, params3.y) - 0.5) * 0.5;
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_BASECOLOR_AND_TRANSPARENCY
+  vec4 SurfacesFragmentModifyBaseColorAndTransparency()
+  {
+    if (FOWShape() < 0.5) discard;
+
+    float alpha = FOWAlpha();
+    #if USE_ALPHA_TEST
+      if (alpha < params.w) discard;
+    #endif
+
+    vec4 baseTex = texture(baseMap, FOWBaseUV());
+    baseTex.rgb = SRGBToLinear(baseTex.rgb);
+
+    float invMask = FOWInvMask();
+    float t1 = step(invMask, params2.y + params2.x) * step(params2.x, invMask);
+    float t2 = step(invMask, params2.w + params2.z) * step(params2.z, invMask);
+
+    vec4 color = mix(baseTex * params.y, edgeColor1, t1);
+    color = mix(color, edgeColor2, t2);
+    return vec4(color.rgb, 1.0);
+  }
+
+  #define CC_SURFACES_FRAGMENT_ALPHA_CLIP_ONLY
+  void SurfacesFragmentAlphaClipOnly()
+  {
+    if (FOWShape() < 0.5) discard;
+
+    #if USE_ALPHA_TEST
+      if (FOWAlpha() < params.w) discard;
+    #endif
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_WORLD_NORMAL
+  vec3 SurfacesFragmentModifyWorldNormal()
+  {
+    vec3 nmmp = texture(normalMap, FOWNormalUV()).xyz - vec3(0.5);
+    vec3 normal = CalculateNormalFromTangentSpace(nmmp, params.z, normalize(FSInput_worldNormal),
+                                                  normalize(FSInput_worldTangent), FSInput_mirrorNormal);
+    return normalize(normal);
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_PBRPARAMS
+  vec4 SurfacesFragmentModifyPBRParams()
+  {
+    return vec4(1.0, clamp(1.0 - params3.x, 0.02, 1.0), 0.0, 0.5);
+  }
+}%
+
+CCProgram standard-vs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surfaces/includes/standard-vs>
+  #include <shading-entries/main-functions/render-to-scene/vs>
+}%
+
+CCProgram standard-fs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <lighting-models/includes/standard>
+  #include <surfaces/includes/standard-fs>
+  #include <shading-entries/main-functions/render-to-scene/fs>
+}%
+
+CCProgram shadow-caster-vs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <shading-entries/main-functions/render-to-shadowmap/vs>
+}%
+
+CCProgram shadow-caster-fs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <shading-entries/main-functions/render-to-shadowmap/fs>
+}%

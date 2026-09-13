@@ -1,0 +1,146 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55",
+  "files": [],
+  "subMetas": {
+    "8d408": {
+      "importer": "gltf-mesh",
+      "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55@8d408",
+      "displayName": "",
+      "id": "8d408",
+      "name": "tile_01_mobile.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 2
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e2a88": {
+      "importer": "gltf-embeded-image",
+      "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55@e2a88",
+      "displayName": "",
+      "id": "e2a88",
+      "name": "dungeon_floor_main_tex.image",
+      "userData": {
+        "gltfIndex": 0,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": true,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "728ec": {
+      "importer": "texture",
+      "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55@728ec",
+      "displayName": "",
+      "id": "728ec",
+      "name": "dungeon_floor_main_tex.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "90fb9220-0e9f-454a-8978-0b762a3d5f55@e2a88"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9b765": {
+      "importer": "gltf-material",
+      "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55@9b765",
+      "displayName": "",
+      "id": "9b765",
+      "name": "dungeon_floor_main_mat.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "02eca": {
+      "importer": "gltf-scene",
+      "uuid": "90fb9220-0e9f-454a-8978-0b762a3d5f55@02eca",
+      "displayName": "",
+      "id": "02eca",
+      "name": "tile_01_mobile.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "dungeon_floor_main_tex",
+        "uri": "90fb9220-0e9f-454a-8978-0b762a3d5f55@e2a88"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "90fb9220-0e9f-454a-8978-0b762a3d5f55@8d408"
+      ],
+      "skeletons": [],
+      "textures": [
+        "90fb9220-0e9f-454a-8978-0b762a3d5f55@728ec"
+      ],
+      "materials": [
+        "90fb9220-0e9f-454a-8978-0b762a3d5f55@9b765"
+      ],
+      "scenes": [
+        "90fb9220-0e9f-454a-8978-0b762a3d5f55@02eca"
+      ]
+    }
+  }
+}

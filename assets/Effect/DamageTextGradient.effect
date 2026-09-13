@@ -1,0 +1,73 @@
+// Vertical gradient for floating combat text.
+//
+// The label rasterises its glyphs white with a black outline, and this pass tints
+// only what is bright: black outline pixels stay black because the gradient is
+// multiplied in. Needs Label.cacheMode = NONE so uv0.y runs 0..1 over the label
+// itself — inside a shared atlas the uv would cover the atlas, not the text.
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: gradient-vs:vert
+      frag: gradient-fs:frag
+      depthStencilState:
+        depthTest: false
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      rasterizerState:
+        cullMode: none
+      properties:
+        alphaThreshold: { value: 0.02 }
+        topColor: { value: [1.0, 0.92, 0.45, 1.0], editor: { type: color } }
+        bottomColor: { value: [1.0, 0.55, 0.12, 1.0], editor: { type: color } }
+}%
+
+CCProgram gradient-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+
+  out vec4 color;
+  out vec2 uv0;
+
+  vec4 vert () {
+    // UI vertices arrive already in world space from the 2D batcher.
+    vec4 pos = cc_matViewProj * vec4(a_position, 1.0);
+    uv0 = a_texCoord;
+    color = a_color;
+    return pos;
+  }
+}%
+
+CCProgram gradient-fs %{
+  precision highp float;
+  #include <builtin/internal/embedded-alpha>
+  #include <builtin/internal/alpha-test>
+
+  in vec4 color;
+  in vec2 uv0;
+
+  #pragma builtin(local)
+  layout(set = 2, binding = 12) uniform sampler2D cc_spriteTexture;
+
+  uniform Gradient {
+    vec4 topColor;
+    vec4 bottomColor;
+  };
+
+  vec4 frag () {
+    vec4 o = CCSampleWithAlphaSeparated(cc_spriteTexture, uv0);
+    // uv0.y is 0 at the top of the label, so top colour belongs to the low end.
+    o.rgb *= mix(topColor.rgb, bottomColor.rgb, uv0.y);
+    o *= color;
+    ALPHA_TEST(o);
+    return o;
+  }
+}%

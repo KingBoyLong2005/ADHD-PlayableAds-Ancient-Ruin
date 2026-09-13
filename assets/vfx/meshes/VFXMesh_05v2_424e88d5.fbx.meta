@@ -1,0 +1,100 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "1823dcb8-e217-4de1-940d-0f0c1a09ef78",
+  "files": [],
+  "subMetas": {
+    "8d1a0": {
+      "importer": "gltf-mesh",
+      "uuid": "1823dcb8-e217-4de1-940d-0f0c1a09ef78@8d1a0",
+      "displayName": "",
+      "id": "8d1a0",
+      "name": "VFXMesh_05v2.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 32
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "07029": {
+      "importer": "gltf-material",
+      "uuid": "1823dcb8-e217-4de1-940d-0f0c1a09ef78@07029",
+      "displayName": "",
+      "id": "07029",
+      "name": "VFXMesh_05v2.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1dee2": {
+      "importer": "gltf-scene",
+      "uuid": "1823dcb8-e217-4de1-940d-0f0c1a09ef78@1dee2",
+      "displayName": "",
+      "id": "1dee2",
+      "name": "VFXMesh_05v2_424e88d5.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "1823dcb8-e217-4de1-940d-0f0c1a09ef78@8d1a0"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "1823dcb8-e217-4de1-940d-0f0c1a09ef78@07029"
+      ],
+      "scenes": [
+        "1823dcb8-e217-4de1-940d-0f0c1a09ef78@1dee2"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true
+    }
+  }
+}

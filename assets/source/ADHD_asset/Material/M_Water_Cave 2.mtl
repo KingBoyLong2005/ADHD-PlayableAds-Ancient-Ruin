@@ -1,0 +1,58 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "57726b95-e54e-4ffa-9919-1db41af297ec",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {}
+  ],
+  "_states": [
+    {}
+  ],
+  "_props": [
+    {
+      "foamMap": {
+        "__uuid__": "e9a26d89-72d9-41f9-96e9-3af29e58bd87@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "color1": {
+        "__type__": "cc.Color",
+        "r": 4,
+        "g": 197,
+        "b": 116,
+        "a": 255
+      },
+      "color2": {
+        "__type__": "cc.Color",
+        "r": 0,
+        "g": 74,
+        "b": 41,
+        "a": 145
+      },
+      "tillingFoam": {
+        "__type__": "cc.Vec4",
+        "x": 2.16,
+        "y": 3.34,
+        "z": 0,
+        "w": 0
+      },
+      "speedNoise": {
+        "__type__": "cc.Vec4",
+        "x": 0.07,
+        "y": -0.05,
+        "z": 0,
+        "w": 0
+      },
+      "intersection": 3,
+      "distortStrength": 0.15,
+      "noiseIntersecScale": 200,
+      "speedIntersec": 0.1,
+      "stepIntersec": 1
+    }
+  ]
+}

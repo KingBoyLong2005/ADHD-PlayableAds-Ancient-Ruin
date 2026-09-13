@@ -1,0 +1,76 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Outline_red.shadergraph
+// Graph logic:
+//   VertexPosition = objectPosition + normalize(objectNormal) * _outline_with
+//   BaseColor      = _Color
+// Rendered with front-face culling so only the extruded silhouette stays visible
+// (the Unity material was used as a hull/outline pass).
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: outline-vs:vert
+      frag: outline-fs:frag
+      rasterizerState:
+        cullMode: front
+      properties: &props
+        outlineWidth: { value: 0.0, target: params.x, editor: { displayName: Outline Width, slide: true, range: [0, 1], step: 0.001 } }
+        # HDR (M_Outline_red/orange dùng giá trị > 1) -> để dạng vec4 thay vì color picker
+        outlineColor: { value: [1.0, 0.0, 0.0, 1.0], editor: { displayName: Color } }
+  - name: transparent
+    passes:
+    - vert: outline-vs:vert
+      frag: outline-fs:frag
+      rasterizerState:
+        cullMode: front
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+}%
+
+CCProgram outline-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/fog-vs>
+
+  uniform OutlineVert {
+    vec4 params;   // x: outlineWidth
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    In.position.xyz += normalize(In.normal) * params.x;
+
+    mat4 matWorld;
+    CCGetWorldMatrix(matWorld);
+
+    CC_TRANSFER_FOG(matWorld * In.position);
+    return cc_matProj * (cc_matView * matWorld) * In.position;
+  }
+}%
+
+CCProgram outline-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  #include <legacy/fog-fs>
+
+  uniform OutlineFrag {
+    vec4 outlineColor;
+  };
+
+  vec4 frag () {
+    vec4 o = outlineColor;
+    CC_APPLY_FOG(o);
+    return CCFragOutput(o);
+  }
+}%

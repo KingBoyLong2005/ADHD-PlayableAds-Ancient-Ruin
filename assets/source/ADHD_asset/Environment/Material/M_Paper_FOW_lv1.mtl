@@ -1,0 +1,88 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "__editorExtras__": {},
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "a7db9b35-7500-4b58-af5c-4cf164fa4777",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {},
+    {}
+  ],
+  "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    }
+  ],
+  "_props": [
+    {
+      "baseMap": {
+        "__uuid__": "98679b38-21f3-49a8-b5ab-620163b4f447@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "normalMap": {
+        "__uuid__": "86dc70a4-02a6-4496-8959-5cdbfebca6e0@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "shapeMask": {
+        "__uuid__": "7776f599-973c-4c4d-8587-bff8f61970fc@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "tilingOffset": {
+        "__type__": "cc.Vec4",
+        "x": 0.08,
+        "y": 0.05,
+        "z": 0,
+        "w": 0
+      },
+      "normalTiling": {
+        "__type__": "cc.Vec4",
+        "x": 0.4,
+        "y": 0.4,
+        "z": 0,
+        "w": 0
+      },
+      "camRTPos": {
+        "__type__": "cc.Vec4",
+        "x": 56,
+        "y": 27.8,
+        "z": 0,
+        "w": 0
+      },
+      "mapRect": {
+        "__type__": "cc.Vec4",
+        "x": -15.929,
+        "y": -42.3125,
+        "z": 55.45,
+        "w": 55.45
+      },
+      "orthoSize": 40,
+      "alphaThreshold": 0.686,
+      "edge": 0.9,
+      "offset": 0.08,
+      "edge1": 0.78,
+      "offset1": 0.08,
+      "smoothness": 1
+    },
+    {}
+  ]
+}

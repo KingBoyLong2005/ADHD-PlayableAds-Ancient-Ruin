@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "82a1191e-ab05-4c4a-9d2d-8015d4649f4c",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {}
+  ],
+  "_states": [
+    {}
+  ],
+  "_props": [
+    {
+      "baseMap": {
+        "__uuid__": "e0265408-81ef-44b9-a2ba-e461c9375434@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "colorId": 0,
+      "fresnelPower": 2
+    }
+  ]
+}

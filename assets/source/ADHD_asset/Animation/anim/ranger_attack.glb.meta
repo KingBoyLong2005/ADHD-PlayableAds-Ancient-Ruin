@@ -1,0 +1,121 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "a9af76de-15b1-498e-9a96-c5c1c72e7977",
+  "files": [
+    "__original-animation-0.bin"
+  ],
+  "subMetas": {
+    "0a552": {
+      "importer": "gltf-animation",
+      "uuid": "a9af76de-15b1-498e-9a96-c5c1c72e7977@0a552",
+      "displayName": "",
+      "id": "0a552",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.350000023841858
+        },
+        "events": [],
+        "embeddedPlayers": [],
+        "editorExtras": {
+          "embeddedPlayerGroups": []
+        },
+        "speed": 1,
+        "auxiliaryCurves": {}
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "761f8": {
+      "importer": "gltf-skeleton",
+      "uuid": "a9af76de-15b1-498e-9a96-c5c1c72e7977@761f8",
+      "displayName": "",
+      "id": "761f8",
+      "name": "DeformationSystem.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 43
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "665be": {
+      "importer": "gltf-scene",
+      "uuid": "a9af76de-15b1-498e-9a96-c5c1c72e7977@665be",
+      "displayName": "",
+      "id": "665be",
+      "name": "ranger_attack.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "animationImportSettings": [
+      {
+        "name": "ranger_attack",
+        "duration": 1.350000023841858,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "attack",
+            "from": 0,
+            "to": 1.350000023841858,
+            "wrapMode": 2,
+            "previousId": "0a552"
+          }
+        ]
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [
+        "a9af76de-15b1-498e-9a96-c5c1c72e7977@761f8"
+      ],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "a9af76de-15b1-498e-9a96-c5c1c72e7977@665be"
+      ]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "97751579-fb62-4100-ad97-c2d02bb83b89",
+  "files": [],
+  "subMetas": {
+    "01a57": {
+      "importer": "gltf-mesh",
+      "uuid": "97751579-fb62-4100-ad97-c2d02bb83b89@01a57",
+      "displayName": "",
+      "id": "01a57",
+      "name": "cone_7f7e5bb9.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 20
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "581b6": {
+      "importer": "gltf-scene",
+      "uuid": "97751579-fb62-4100-ad97-c2d02bb83b89@581b6",
+      "displayName": "",
+      "id": "581b6",
+      "name": "cone_7f7e5bb9.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "97751579-fb62-4100-ad97-c2d02bb83b89@01a57"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "97751579-fb62-4100-ad97-c2d02bb83b89@581b6"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

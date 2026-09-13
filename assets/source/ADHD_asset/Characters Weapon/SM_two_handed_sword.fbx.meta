@@ -1,0 +1,146 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753",
+  "files": [],
+  "subMetas": {
+    "a8494": {
+      "importer": "gltf-mesh",
+      "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753@a8494",
+      "displayName": "",
+      "id": "a8494",
+      "name": "two_handed_sword.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 228
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "43c71": {
+      "importer": "gltf-embeded-image",
+      "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753@43c71",
+      "displayName": "",
+      "id": "43c71",
+      "name": "file1.image",
+      "userData": {
+        "gltfIndex": 0,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": true,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "d20e9": {
+      "importer": "texture",
+      "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753@d20e9",
+      "displayName": "",
+      "id": "d20e9",
+      "name": "file1.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "90f9d315-2769-420b-a4fa-2a02a20f7753@43c71"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f526": {
+      "importer": "gltf-material",
+      "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753@1f526",
+      "displayName": "",
+      "id": "1f526",
+      "name": "M_warrior_weapon.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8d0e6": {
+      "importer": "gltf-scene",
+      "uuid": "90f9d315-2769-420b-a4fa-2a02a20f7753@8d0e6",
+      "displayName": "",
+      "id": "8d0e6",
+      "name": "SM_two_handed_sword.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file1",
+        "uri": "90f9d315-2769-420b-a4fa-2a02a20f7753@43c71"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "90f9d315-2769-420b-a4fa-2a02a20f7753@a8494"
+      ],
+      "skeletons": [],
+      "textures": [
+        "90f9d315-2769-420b-a4fa-2a02a20f7753@d20e9"
+      ],
+      "materials": [
+        "90f9d315-2769-420b-a4fa-2a02a20f7753@1f526"
+      ],
+      "scenes": [
+        "90f9d315-2769-420b-a4fa-2a02a20f7753@8d0e6"
+      ]
+    }
+  }
+}

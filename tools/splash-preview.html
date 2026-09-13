@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Splash preview — ADHD</title>
+<style>
+  :root {
+    --bg: #14121a; --panel: #1d1b25; --line: #302d3b;
+    --fg: #e8e6ef; --dim: #9a95ad; --accent: #b98cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 13px/1.5 ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+    display: flex; gap: 24px; padding: 24px; align-items: flex-start;
+  }
+  h1 { font-size: 15px; margin: 0 0 4px; }
+  p.note { color: var(--dim); margin: 0 0 16px; max-width: 460px; }
+
+  /* --- khung máy --- */
+  #stageWrap { flex: 0 0 auto; }
+  #stage {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  }
+  #logo { position: absolute; image-rendering: auto; }
+  #text {
+    position: absolute; left: 0; width: 100%;
+    text-align: center; white-space: pre; line-height: 1;
+  }
+  .guide { position: absolute; left: 0; width: 100%; border-top: 1px dashed rgba(255,255,255,.28); }
+  .guide span {
+    position: absolute; right: 4px; top: -14px;
+    font: 10px/1 ui-monospace, Consolas, monospace; color: rgba(255,255,255,.5);
+  }
+  #meta { color: var(--dim); margin-top: 8px; font: 11px/1.6 ui-monospace, Consolas, monospace; }
+
+  /* --- bảng chỉnh --- */
+  #panel { flex: 1 1 auto; min-width: 340px; max-width: 560px; }
+  fieldset { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); margin: 0 0 14px; padding: 12px 14px 14px; }
+  legend { color: var(--dim); padding: 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .row { display: grid; grid-template-columns: 96px 1fr 62px; gap: 10px; align-items: center; margin-top: 8px; }
+  .row:first-of-type { margin-top: 0; }
+  .row > label { color: var(--dim); }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  input[type=text], input[type=number], select {
+    width: 100%; background: #100f15; color: var(--fg);
+    border: 1px solid var(--line); border-radius: 6px; padding: 5px 7px; font: inherit;
+  }
+  input[type=color] { width: 100%; height: 28px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: #100f15; }
+  .val { color: var(--fg); font: 12px ui-monospace, Consolas, monospace; text-align: right; }
+  .full { grid-column: 1 / -1; }
+  pre {
+    margin: 0; padding: 12px; background: #100f15; border: 1px solid var(--line);
+    border-radius: 8px; overflow-x: auto; color: #cfc7e8;
+    font: 12px/1.55 ui-monospace, Consolas, monospace;
+  }
+  code { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div id="stageWrap">
+  <div id="stage">
+    <img id="logo" alt="">
+    <div id="text"></div>
+    <div class="guide" id="gLogoBottom"><span>đáy icon</span></div>
+    <div class="guide" id="gTextTop"><span>đầu chữ</span></div>
+  </div>
+  <div id="meta"></div>
+</div>
+
+<div id="panel">
+  <h1>Splash preview</h1>
+  <p class="note">
+    Dựng lại đúng công thức đặt icon/chữ của bản vá trong
+    <code>build-templates/web-mobile/application.js</code>. Chỉnh ở đây cho vừa mắt
+    rồi chép khối <code>SPLASH_TEXT</code> ở cuối trang dán đè vào file đó — không
+    phải build lại để ngắm.
+  </p>
+
+  <fieldset>
+    <legend>Màn hình</legend>
+    <div class="row">
+      <label for="device">Máy</label>
+      <select id="device" class="full" style="grid-column: 2 / -1">
+        <option value="1080x1920">1080 × 1920 (9:16)</option>
+        <option value="1170x2532">1170 × 2532 (iPhone 13)</option>
+        <option value="1080x2340">1080 × 2340 (9:19.5)</option>
+        <option value="750x1334">750 × 1334 (iPhone 8)</option>
+        <option value="414x896">414 × 896 (CSS px)</option>
+        <option value="1920x1080">1920 × 1080 (ngang)</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Chữ</legend>
+    <div class="row"><label for="text_">Nội dung</label><input id="text_" type="text" class="full" style="grid-column: 2 / -1" value="ADHD Cave"></div>
+    <div class="row"><label for="fontSize">fontSize</label><input id="fontSize" type="range" min="12" max="160" step="1" value="56"><span class="val" id="vFontSize"></span></div>
+    <div class="row"><label for="gapY">gapY</label><input id="gapY" type="range" min="-300" max="300" step="1" value="40"><span class="val" id="vGapY"></span></div>
+    <div class="row"><label for="offsetX">offsetX</label><input id="offsetX" type="range" min="-400" max="400" step="1" value="0"><span class="val" id="vOffsetX"></span></div>
+    <div class="row"><label for="lineGap">lineGap</label><input id="lineGap" type="range" min="0" max="80" step="1" value="8"><span class="val" id="vLineGap"></span></div>
+    <div class="row"><label for="color">color</label><input id="color" type="color" value="#ffffff"><span class="val"></span></div>
+    <div class="row"><label for="fontWeight">fontWeight</label>
+      <select id="fontWeight" style="grid-column: 2 / -1">
+        <option>normal</option><option selected>bold</option><option>900</option>
+      </select>
+    </div>
+    <div class="row"><label for="fontFamily">fontFamily</label><input id="fontFamily" type="text" style="grid-column: 2 / -1" value="Arial, Helvetica, sans-serif"></div>
+    <div class="row"><label for="strokeColor">strokeColor</label><input id="strokeColor" type="color" value="#000000"><span class="val"></span></div>
+    <div class="row"><label for="strokeWidth">strokeWidth</label><input id="strokeWidth" type="range" min="0" max="20" step="1" value="0"><span class="val" id="vStrokeWidth"></span></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Chép vào application.js</legend>
+    <pre id="out"></pre>
+  </fieldset>
+</div>
+
+<script>
+// Ba hằng số này lấy từ engine + settings, đổi ở đó thì đổi luôn ở đây:
+//   LOGO_Y_TRANS  vị trí tâm icon, tính từ đáy màn (splash-screen.ts)
+//   LOGO_RATIO    icon cao 0.185 * cao màn * displayRatio
+//   DISPLAY_RATIO settings/v2/packages/builder.json -> splash-setting.displayRatio
+var LOGO_Y_TRANS = 1 / 6 + 2.5 / 6;
+var LOGO_RATIO = 0.185;
+var DISPLAY_RATIO = 2;
+var BG = 'rgb(38, 3, 70)';        // builder.json -> splash-setting.background.color
+var REF_W = 1080, REF_H = 1920;   // mọi số px trong SPLASH_TEXT đo trên khung này
+var VIEW_H = 620;                 // chiều cao khung xem trên trang này
+
+var $ = function (id) { return document.getElementById(id); };
+var stage = $('stage'), logo = $('logo'), text = $('text');
+
+logo.src = '../settings/icon.png';
+logo.onerror = function () {
+  document.getElementById('meta').textContent = 'không đọc được ../settings/icon.png';
+};
+
+function cfg() {
+  return {
+    text: $('text_').value,
+    fontSize: +$('fontSize').value,
+    gapY: +$('gapY').value,
+    offsetX: +$('offsetX').value,
+    color: $('color').value,
+    fontFamily: $('fontFamily').value,
+    fontWeight: $('fontWeight').value,
+    lineGap: +$('lineGap').value,
+    strokeColor: +$('strokeWidth').value > 0 ? $('strokeColor').value : '',
+    strokeWidth: +$('strokeWidth').value
+  };
+}
+
+function render() {
+  var c = cfg();
+  var dim = $('device').value.split('x');
+  var W = +dim[0], H = +dim[1];
+  var zoom = VIEW_H / H;
+
+  stage.style.width = (W * zoom) + 'px';
+  stage.style.height = (H * zoom) + 'px';
+  stage.style.background = BG;
+
+  // --- icon: engine vẽ cao đúng 0.185 * cao màn * displayRatio, tâm ở LOGO_Y_TRANS
+  var aspect = (logo.naturalWidth || 1) / (logo.naturalHeight || 1);
+  var logoH = LOGO_RATIO * H * DISPLAY_RATIO;
+  var logoW = logoH * aspect;
+  var logoCy = H * LOGO_Y_TRANS;                 // tính từ đáy màn
+  var logoTopCss = H - (logoCy + logoH / 2);     // đổi sang toạ độ tính từ đỉnh
+  logo.style.width = (logoW * zoom) + 'px';
+  logo.style.height = (logoH * zoom) + 'px';
+  logo.style.left = ((W - logoW) / 2 * zoom) + 'px';
+  logo.style.top = (logoTopCss * zoom) + 'px';
+
+  // --- chữ: mép trên nằm dưới đáy icon đúng gapY (px @1920)
+  var k = H / REF_H;
+  var textTopCss = logoTopCss + logoH + c.gapY * k;
+  var fontPx = c.fontSize * k;
+  var lineH = fontPx + c.lineGap * k;
+
+  text.textContent = c.text;
+  text.style.top = (textTopCss * zoom) + 'px';
+  text.style.font = c.fontWeight + ' ' + (fontPx * zoom) + 'px ' + c.fontFamily;
+  text.style.lineHeight = (lineH * zoom) + 'px';
+  text.style.color = c.color;
+  text.style.transform = 'translateX(' + (c.offsetX / REF_W * W * zoom) + 'px)';
+  text.style.webkitTextStroke = c.strokeWidth > 0
+    ? (c.strokeWidth * k * zoom) + 'px ' + c.strokeColor : '';
+  text.style.paintOrder = 'stroke fill';
+
+  $('gLogoBottom').style.top = ((logoTopCss + logoH) * zoom) + 'px';
+  $('gTextTop').style.top = (textTopCss * zoom) + 'px';
+
+  $('vFontSize').textContent = c.fontSize;
+  $('vGapY').textContent = c.gapY;
+  $('vOffsetX').textContent = c.offsetX;
+  $('vLineGap').textContent = c.lineGap;
+  $('vStrokeWidth').textContent = c.strokeWidth;
+  $('meta').textContent =
+    W + '×' + H + '  ·  icon cao ' + Math.round(logoH) + 'px (' +
+    Math.round(logoH / H * 100) + '% màn)  ·  chữ cao ' + Math.round(fontPx) + 'px  ·  xem ở ' +
+    Math.round(zoom * 100) + '%';
+
+  $('out').textContent =
+    'var SPLASH_TEXT = {\n' +
+    "  text: '" + c.text.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "',\n" +
+    '  fontSize: ' + c.fontSize + ',\n' +
+    '  gapY: ' + c.gapY + ',\n' +
+    '  offsetX: ' + c.offsetX + ',\n' +
+    "  color: '" + c.color + "',\n" +
+    "  fontFamily: '" + c.fontFamily + "',\n" +
+    "  fontWeight: '" + c.fontWeight + "',\n" +
+    '  lineGap: ' + c.lineGap + ',\n' +
+    "  strokeColor: '" + c.strokeColor + "',\n" +
+    '  strokeWidth: ' + c.strokeWidth + ',\n' +
+    '  maxWidth: 0.9\n' +
+    '};';
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('input, select'), function (el) {
+  el.addEventListener('input', render);
+  el.addEventListener('change', render);
+});
+logo.addEventListener('load', render);
+render();
+</script>
+</body>
+</html>

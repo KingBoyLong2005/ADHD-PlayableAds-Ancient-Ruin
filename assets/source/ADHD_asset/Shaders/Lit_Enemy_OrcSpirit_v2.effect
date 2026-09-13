@@ -1,0 +1,137 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Lit_Enemy_OrcSpirit_v2.shadergraph
+// (Unlit sub target, transparent with depth write)
+// Graph logic:
+//   colorSel  = ColorSwitch(_Color_ID, 6 hardcoded HDR colors)
+//   noiseUV   = TilingAndOffset(viewPos.xy, (1,1), (0, time * -0.2))
+//   noise     = SampleTexture2D(_Noise_Map, noiseUV)
+//   base      = SampleTexture2D(_BaseMap, uv0)
+//   body      = base * (noise * colorSel) * colorSel
+//   fresnel   = Fresnel(power = _Power_fresnel)
+//   rim       = (colorSel + vec3(0.5, 0.3, 0.7)) * fresnel
+//   BaseColor = body + rim ; Alpha = fresnel
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: spirit-vs:vert
+      frag: spirit-fs:frag
+      depthStencilState:
+        depthTest: true
+        depthWrite: true
+        depthFunc: less_equal
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: &props
+        baseMap:      { value: grey, editor: { displayName: BaseMap } }
+        noiseMap:     { value: grey, editor: { displayName: Noise Map } }
+        colorId:      { value: 0.0, target: params.x, editor: { displayName: Color ID, slide: true, range: [0, 5], step: 1 } }
+        fresnelPower: { value: 1.0, target: params.y, editor: { displayName: Power fresnel, slide: true, range: [0, 8], step: 0.001 } }
+        noiseSpeed:   { value: -0.2, target: params.z, editor: { displayName: Noise Speed } }
+        # HDR palette baked into the Unity graph
+        color0:       { value: [0.0, 8.574189, 6.000506, 1.0] }
+        color1:       { value: [0.0, 8.574189, 0.539579, 1.0] }
+        color2:       { value: [0.0, 4.551723, 8.574189, 1.0] }
+        color3:       { value: [8.574189, 8.178146, 0.0, 1.0] }
+        color4:       { value: [8.574189, 2.183790, 0.0, 1.0] }
+        color5:       { value: [8.574189, 0.0, 0.254468, 1.0] }
+        rimBias:      { value: [0.5, 0.3, 0.7, 0.0], editor: { displayName: Rim Bias } }
+}%
+
+CCProgram spirit-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/fog-vs>
+
+  out vec2 v_uv;
+  out vec3 v_worldPos;
+  out vec3 v_worldNormal;
+  out vec3 v_viewPos;
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld, matWorldIT;
+    CCGetWorldMatrixFull(matWorld, matWorldIT);
+
+    vec4 worldPos = matWorld * In.position;
+    vec4 viewPos = cc_matView * worldPos;
+
+    v_uv = a_texCoord;
+    v_worldPos = worldPos.xyz;
+    v_worldNormal = normalize((matWorldIT * vec4(In.normal, 0.0)).xyz);
+    v_viewPos = viewPos.xyz;
+
+    CC_TRANSFER_FOG(worldPos);
+    return cc_matProj * viewPos;
+  }
+}%
+
+CCProgram spirit-fs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/output-standard>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  in vec3 v_worldPos;
+  in vec3 v_worldNormal;
+  in vec3 v_viewPos;
+
+  uniform sampler2D baseMap;
+  uniform sampler2D noiseMap;
+
+  uniform Constant {
+    vec4 params;   // x: colorId, y: fresnelPower, z: noiseSpeed
+    vec4 color0;
+    vec4 color1;
+    vec4 color2;
+    vec4 color3;
+    vec4 color4;
+    vec4 color5;
+    vec4 rimBias;
+  };
+
+  vec4 ColorSwitch6(float index)
+  {
+    int i = int(index + 0.5);
+    vec4 o = color0;
+    if (i == 1) { o = color1; }
+    else if (i == 2) { o = color2; }
+    else if (i == 3) { o = color3; }
+    else if (i == 4) { o = color4; }
+    else if (i >= 5) { o = color5; }
+    return o;
+  }
+
+  vec4 frag () {
+    vec4 colorSel = ColorSwitch6(params.x);
+
+    vec2 noiseUV = v_viewPos.xy + vec2(0.0, cc_time.x * params.z);
+    vec4 noise = texture(noiseMap, noiseUV);
+    noise.rgb = SRGBToLinear(noise.rgb);
+
+    vec4 base = texture(baseMap, v_uv);
+    base.rgb = SRGBToLinear(base.rgb);
+
+    vec4 body = base * (noise * colorSel) * colorSel;
+
+    vec3 N = normalize(v_worldNormal);
+    vec3 V = normalize(cc_cameraPos.xyz - v_worldPos);
+    float fresnel = pow(max(1.0 - max(dot(N, V), 0.0), 0.0), max(params.y, 1e-4));
+
+    vec4 rim = (colorSel + rimBias) * fresnel;
+
+    vec4 o = body + rim;
+    o.a = fresnel;
+
+    CC_APPLY_FOG(o);
+    return CCFragOutput(o);
+  }
+}%

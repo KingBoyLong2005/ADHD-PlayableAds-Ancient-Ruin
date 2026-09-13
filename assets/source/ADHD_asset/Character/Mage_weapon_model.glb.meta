@@ -1,0 +1,80 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "7a4e8cd1-773d-42de-a27f-307d3c94b248",
+  "files": [],
+  "subMetas": {
+    "7a76f": {
+      "importer": "gltf-mesh",
+      "uuid": "7a4e8cd1-773d-42de-a27f-307d3c94b248@7a76f",
+      "displayName": "",
+      "id": "7a76f",
+      "name": "Mesh.033.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 310
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f6bc5": {
+      "importer": "gltf-scene",
+      "uuid": "7a4e8cd1-773d-42de-a27f-307d3c94b248@f6bc5",
+      "displayName": "",
+      "id": "f6bc5",
+      "name": "Mage_weapon_model.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "7a4e8cd1-773d-42de-a27f-307d3c94b248@7a76f"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "7a4e8cd1-773d-42de-a27f-307d3c94b248@f6bc5"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "f07d065e-2309-4de5-8644-5b79f0054b0a",
+  "files": [],
+  "subMetas": {
+    "53257": {
+      "importer": "gltf-mesh",
+      "uuid": "f07d065e-2309-4de5-8644-5b79f0054b0a@53257",
+      "displayName": "",
+      "id": "53257",
+      "name": "RPGFXCurvedCylinder2.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 180
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9f1e9": {
+      "importer": "gltf-scene",
+      "uuid": "f07d065e-2309-4de5-8644-5b79f0054b0a@9f1e9",
+      "displayName": "",
+      "id": "9f1e9",
+      "name": "RPGFXCurvedCylinder2.FBX_51388ad3.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "f07d065e-2309-4de5-8644-5b79f0054b0a@53257"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "f07d065e-2309-4de5-8644-5b79f0054b0a@9f1e9"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

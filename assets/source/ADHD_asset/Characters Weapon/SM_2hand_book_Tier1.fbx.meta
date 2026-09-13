@@ -1,0 +1,146 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb",
+  "files": [],
+  "subMetas": {
+    "43357": {
+      "importer": "gltf-embeded-image",
+      "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@43357",
+      "displayName": "",
+      "id": "43357",
+      "name": "file13.image",
+      "userData": {
+        "gltfIndex": 0,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": true,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "103eb": {
+      "importer": "gltf-mesh",
+      "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@103eb",
+      "displayName": "",
+      "id": "103eb",
+      "name": "Weapon_Paladin_03.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 441
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "7a71f": {
+      "importer": "texture",
+      "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@7a71f",
+      "displayName": "",
+      "id": "7a71f",
+      "name": "file13.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@43357"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3c3d7": {
+      "importer": "gltf-material",
+      "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@3c3d7",
+      "displayName": "",
+      "id": "3c3d7",
+      "name": "M_Weapon_Paladin.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "47d9f": {
+      "importer": "gltf-scene",
+      "uuid": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@47d9f",
+      "displayName": "",
+      "id": "47d9f",
+      "name": "SM_2hand_book_Tier1.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file13",
+        "uri": "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@43357"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@103eb"
+      ],
+      "skeletons": [],
+      "textures": [
+        "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@7a71f"
+      ],
+      "materials": [
+        "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@3c3d7"
+      ],
+      "scenes": [
+        "3c7ce6a2-740a-4f02-b538-aaf0a059e9eb@47d9f"
+      ]
+    }
+  }
+}

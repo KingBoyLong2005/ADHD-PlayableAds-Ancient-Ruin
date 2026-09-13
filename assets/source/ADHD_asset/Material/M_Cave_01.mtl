@@ -1,0 +1,41 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "97996fcb-da72-4567-b294-3bfac45da239",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {},
+    {}
+  ],
+  "_states": [
+    {},
+    {}
+  ],
+  "_props": [
+    {
+      "mainTexture": {
+        "__uuid__": "e907a0e9-dc64-4cb6-b840-8353b49beab2@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "lightStrength": 0.6,
+      "smoothness": 0.1,
+      "useAlphaMask": 0,
+      "fakeShadow": 0,
+      "shadowMaxHeight": 0.1,
+      "alphaThreshold": 0.5,
+      "tint": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      }
+    },
+    {}
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd",
+  "files": [],
+  "subMetas": {
+    "59044": {
+      "importer": "gltf-mesh",
+      "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd@59044",
+      "displayName": "",
+      "id": "59044",
+      "name": "Bow.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 392
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "bd9bd": {
+      "importer": "gltf-embeded-image",
+      "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd@bd9bd",
+      "displayName": "",
+      "id": "bd9bd",
+      "name": "file64.image",
+      "userData": {
+        "gltfIndex": 0,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": true,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "4d473": {
+      "importer": "texture",
+      "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd@4d473",
+      "displayName": "",
+      "id": "4d473",
+      "name": "file64.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "4cd93692-4352-4634-8959-ab976ec3e9cd@bd9bd"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ad3cd": {
+      "importer": "gltf-material",
+      "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd@ad3cd",
+      "displayName": "",
+      "id": "ad3cd",
+      "name": "M_Bow.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6942c": {
+      "importer": "gltf-scene",
+      "uuid": "4cd93692-4352-4634-8959-ab976ec3e9cd@6942c",
+      "displayName": "",
+      "id": "6942c",
+      "name": "SM_Bow_Tier1.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file64",
+        "uri": "4cd93692-4352-4634-8959-ab976ec3e9cd@bd9bd"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "4cd93692-4352-4634-8959-ab976ec3e9cd@59044"
+      ],
+      "skeletons": [],
+      "textures": [
+        "4cd93692-4352-4634-8959-ab976ec3e9cd@4d473"
+      ],
+      "materials": [
+        "4cd93692-4352-4634-8959-ab976ec3e9cd@ad3cd"
+      ],
+      "scenes": [
+        "4cd93692-4352-4634-8959-ab976ec3e9cd@6942c"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

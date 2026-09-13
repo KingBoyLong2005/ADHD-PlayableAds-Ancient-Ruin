@@ -1,0 +1,25 @@
+{
+  "__version__": "1.0.6",
+  "general": {
+    "designResolution": {
+      "width": 1080,
+      "height": 1920,
+      "fitHeight": true,
+      "fitWidth": false
+    }
+  },
+  "layer": [
+    {
+      "name": "SelectScene",
+      "value": 1
+    },
+    {
+      "name": "HeroPreview",
+      "value": 2
+    }
+  ],
+  "custom_joint_texture_layouts": [],
+  "script": {
+    "preserveSymlinks": false
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "a7db9b35-7500-4b58-af5c-4cf164fa4777",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {},
+    {}
+  ],
+  "_states": [
+    {},
+    {}
+  ],
+  "_props": [
+    {
+      "baseMap": {
+        "__uuid__": "44c693ce-8bec-43e6-b886-d3218e351cfd@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "normalMap": {
+        "__uuid__": "86dc70a4-02a6-4496-8959-5cdbfebca6e0@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "tilingOffset": {
+        "__type__": "cc.Vec4",
+        "x": 0.2,
+        "y": 0.2,
+        "z": 0,
+        "w": 0
+      },
+      "camRTPos": {
+        "__type__": "cc.Vec4",
+        "x": 56,
+        "y": 27.8,
+        "z": 0,
+        "w": 0
+      },
+      "orthoSize": 40,
+      "lightStrength": 2,
+      "normalStrength": 2,
+      "alphaThreshold": 0.686,
+      "edge": 0.9,
+      "offset": 0.08,
+      "edge1": 0.78,
+      "offset1": 0.08
+    },
+    {}
+  ]
+}

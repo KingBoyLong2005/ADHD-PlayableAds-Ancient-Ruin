@@ -1,0 +1,100 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "20e7da1c-dc9a-428c-be97-8fe436259aa5",
+  "files": [],
+  "subMetas": {
+    "24157": {
+      "importer": "gltf-scene",
+      "uuid": "20e7da1c-dc9a-428c-be97-8fe436259aa5@24157",
+      "displayName": "",
+      "id": "24157",
+      "name": "VFXMesh_07_55f326be.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "788a0": {
+      "importer": "gltf-mesh",
+      "uuid": "20e7da1c-dc9a-428c-be97-8fe436259aa5@788a0",
+      "displayName": "",
+      "id": "788a0",
+      "name": "VFXMesh_07.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 32
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e069c": {
+      "importer": "gltf-material",
+      "uuid": "20e7da1c-dc9a-428c-be97-8fe436259aa5@e069c",
+      "displayName": "",
+      "id": "e069c",
+      "name": "VFXMesh_07.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "20e7da1c-dc9a-428c-be97-8fe436259aa5@788a0"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "20e7da1c-dc9a-428c-be97-8fe436259aa5@e069c"
+      ],
+      "scenes": [
+        "20e7da1c-dc9a-428c-be97-8fe436259aa5@24157"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true
+    }
+  }
+}

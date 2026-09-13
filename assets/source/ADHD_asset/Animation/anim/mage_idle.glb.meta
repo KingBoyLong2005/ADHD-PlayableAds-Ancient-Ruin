@@ -1,0 +1,121 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "a8866691-5ca3-4102-b5ee-d0b66aff7810",
+  "files": [
+    "__original-animation-0.bin"
+  ],
+  "subMetas": {
+    "0aac3": {
+      "importer": "gltf-animation",
+      "uuid": "a8866691-5ca3-4102-b5ee-d0b66aff7810@0aac3",
+      "displayName": "",
+      "id": "0aac3",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 2.3499999046325684
+        },
+        "events": [],
+        "embeddedPlayers": [],
+        "editorExtras": {
+          "embeddedPlayerGroups": []
+        },
+        "speed": 1,
+        "auxiliaryCurves": {}
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "761f8": {
+      "importer": "gltf-skeleton",
+      "uuid": "a8866691-5ca3-4102-b5ee-d0b66aff7810@761f8",
+      "displayName": "",
+      "id": "761f8",
+      "name": "DeformationSystem.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 59
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a2745": {
+      "importer": "gltf-scene",
+      "uuid": "a8866691-5ca3-4102-b5ee-d0b66aff7810@a2745",
+      "displayName": "",
+      "id": "a2745",
+      "name": "mage_idle.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "animationImportSettings": [
+      {
+        "name": "mage_idle",
+        "duration": 2.3499999046325684,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 2.3499999046325684,
+            "wrapMode": 2,
+            "previousId": "0aac3"
+          }
+        ]
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [
+        "a8866691-5ca3-4102-b5ee-d0b66aff7810@761f8"
+      ],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "a8866691-5ca3-4102-b5ee-d0b66aff7810@a2745"
+      ]
+    }
+  }
+}

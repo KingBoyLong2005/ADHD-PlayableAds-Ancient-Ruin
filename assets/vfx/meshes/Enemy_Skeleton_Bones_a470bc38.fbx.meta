@@ -1,0 +1,102 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea",
+  "files": [],
+  "subMetas": {
+    "eaede": {
+      "importer": "gltf-mesh",
+      "uuid": "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@eaede",
+      "displayName": "",
+      "id": "eaede",
+      "name": "Enemy_Skeleton_Bone_01.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 140
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "79d42": {
+      "importer": "gltf-mesh",
+      "uuid": "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@79d42",
+      "displayName": "",
+      "id": "79d42",
+      "name": "Enemy_Skeleton_Bone_02.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 180
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f04a7": {
+      "importer": "gltf-scene",
+      "uuid": "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@f04a7",
+      "displayName": "",
+      "id": "f04a7",
+      "name": "Enemy_Skeleton_Bones_a470bc38.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@eaede",
+        "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@79d42"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "8e52bf3a-221f-4ab5-bd2f-bf13dc0195ea@f04a7"
+      ]
+    },
+    "meshCompress": {
+      "compress": true,
+      "enable": true,
+      "encode": false
+    }
+  }
+}

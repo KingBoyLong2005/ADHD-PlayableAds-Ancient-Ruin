@@ -1,0 +1,160 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Water_Orthor.shadergraph
+// (includes Depth_Orthorgaphic.shadersubgraph inlined)
+// Graph logic:
+//   scroll     = time * _speed_noise
+//   distort    = SampleTexture2D(_Distort_Tex, uv0 * 2 + scroll) * _distort_strenght
+//   foamUV     = uv0 * _Tilling_Foam + scroll * 0.5 + distort.xy
+//   foamColor  = SampleTexture2D(_Foam_Tex, foamUV) * _Color1
+//   noise      = SimpleNoise(uv0 + time * _speed_noise * _Speed_intersec, _Noise_Intersec_Scale)
+//   depth      = saturate(1 - (sceneEyeDepth - fragmentEyeDepth) * _intersection)   // Depth_Orthorgaphic
+//   t          = lerp(depth, step(noise, depth), _Step_Intersec)
+//   BaseColor  = lerp(foamColor, _Color2, t) ; Alpha = that .a
+//
+// NOTE: Cocos' forward pipeline does not expose a scene depth texture to materials.
+// Render depth with a second camera into a RenderTexture and assign it to `sceneDepthMap`
+// (linear/ortho depth in the red channel). Toggle `depthReversed` if the RT stores 1-depth.
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: water-vs:vert
+      frag: water-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: &props
+        foamMap:           { value: grey, editor: { displayName: Foam Tex } }
+        distortMap:        { value: grey, editor: { displayName: Distort Tex } }
+        sceneDepthMap:     { value: black, editor: { displayName: Scene Depth RT } }
+        color1:            { value: [0.015686, 0.772549, 0.454902, 1.0], editor: { type: color } }
+        color2:            { value: [0.0, 0.576471, 0.160784, 1.0], editor: { type: color } }
+        tillingFoam:       { value: [3.0, 4.0, 0.0, 0.0], editor: { displayName: Tilling Foam (xy) } }
+        speedNoise:        { value: [0.1, 0.1, 0.0, 0.0], editor: { displayName: Speed Noise (xy) } }
+        intersection:      { value: 0.23, target: params.x, editor: { slide: true, range: [0, 4], step: 0.001 } }
+        distortStrength:   { value: 0.15, target: params.y, editor: { displayName: Distort Strenght, slide: true, range: [0, 1], step: 0.001 } }
+        noiseIntersecScale: { value: 500.0, target: params.z, editor: { displayName: Noise Intersec Scale } }
+        speedIntersec:     { value: 0.0, target: params.w, editor: { displayName: Speed Intersec, slide: true, range: [0, 0.1], step: 0.0001 } }
+        stepIntersec:      { value: 0.0, target: params2.x, editor: { displayName: Step Intersec?, slide: true, range: [0, 1], step: 1 } }
+        depthReversed:     { value: 0.0, target: params2.y, editor: { displayName: Depth Reversed, slide: true, range: [0, 1], step: 1 } }
+}%
+
+CCProgram water-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/fog-vs>
+
+  out vec2 v_uv;
+  out vec4 v_clipPos;
+  out float v_eyeDepth;
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld;
+    CCGetWorldMatrix(matWorld);
+
+    vec4 worldPos = matWorld * In.position;
+    vec4 viewPos = cc_matView * worldPos;
+    vec4 clipPos = cc_matProj * viewPos;
+
+    v_uv = a_texCoord;
+    v_clipPos = clipPos;
+    v_eyeDepth = -viewPos.z;
+
+    CC_TRANSFER_FOG(worldPos);
+    return clipPos;
+  }
+}%
+
+CCProgram water-fs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <common/common-define>
+  #include <legacy/output-standard>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  in vec4 v_clipPos;
+  in float v_eyeDepth;
+
+  uniform sampler2D foamMap;
+  uniform sampler2D distortMap;
+  uniform sampler2D sceneDepthMap;
+
+  uniform Constant {
+    vec4 color1;
+    vec4 color2;
+    vec4 tillingFoam;
+    vec4 speedNoise;
+    vec4 params;   // x: intersection, y: distortStrength, z: noiseIntersecScale, w: speedIntersec
+    vec4 params2;  // x: stepIntersec, y: depthReversed
+  };
+
+  // ---- Unity_SimpleNoise ----
+  float NoiseRandomValue(vec2 uv) { return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453); }
+  float NoiseInterpolate(float a, float b, float t) { return (1.0 - t) * a + t * b; }
+  float ValueNoise(vec2 uv)
+  {
+    vec2 i = floor(uv);
+    vec2 f = fract(uv);
+    f = f * f * (3.0 - 2.0 * f);
+    float r0 = NoiseRandomValue(i);
+    float r1 = NoiseRandomValue(i + vec2(1.0, 0.0));
+    float r2 = NoiseRandomValue(i + vec2(0.0, 1.0));
+    float r3 = NoiseRandomValue(i + vec2(1.0, 1.0));
+    return NoiseInterpolate(NoiseInterpolate(r0, r1, f.x), NoiseInterpolate(r2, r3, f.x), f.y);
+  }
+  float SimpleNoise(vec2 uv, float scale)
+  {
+    float t = 0.0;
+    t += ValueNoise(vec2(uv.x * scale / 1.0, uv.y * scale / 1.0)) * 0.125;
+    t += ValueNoise(vec2(uv.x * scale / 2.0, uv.y * scale / 2.0)) * 0.25;
+    t += ValueNoise(vec2(uv.x * scale / 4.0, uv.y * scale / 4.0)) * 0.5;
+    return t;
+  }
+
+  // ---- Depth_Orthorgaphic.shadersubgraph ----
+  float DepthOrthographic(float intersectionScale)
+  {
+    vec2 screenUV = v_clipPos.xy / v_clipPos.w * 0.5 + 0.5;
+    CC_HANDLE_RT_SAMPLE_FLIP(screenUV);
+    float raw = texture(sceneDepthMap, screenUV).r;
+    raw = mix(raw, 1.0 - raw, params2.y);
+
+    float sceneEye = mix(cc_nearFar.x, cc_nearFar.y, raw);
+    return clamp(1.0 - (sceneEye - v_eyeDepth) * intersectionScale, 0.0, 1.0);
+  }
+
+  vec4 frag () {
+    vec2 scroll = cc_time.x * speedNoise.xy;
+
+    vec4 distortTex = texture(distortMap, v_uv * vec2(2.0) + scroll);
+    vec2 distort = (distortTex * params.y).xy;
+
+    vec2 foamUV = v_uv * tillingFoam.xy + scroll * 0.5 + distort;
+    vec4 foam = texture(foamMap, foamUV);
+    foam.rgb = SRGBToLinear(foam.rgb);
+    vec4 foamColor = foam * color1;
+
+    vec2 noiseUV = v_uv + cc_time.x * speedNoise.xy * params.w;
+    float noise = SimpleNoise(noiseUV, params.z);
+
+    float depth = DepthOrthographic(params.x);
+    float t = mix(depth, step(noise, depth), params2.x);
+
+    vec4 o = mix(foamColor, color2, t);
+
+    CC_APPLY_FOG(o);
+    return CCFragOutput(o);
+  }
+}%

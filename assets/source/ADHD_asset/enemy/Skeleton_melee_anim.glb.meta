@@ -1,0 +1,196 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119",
+  "files": [
+    "__original-animation-0.bin",
+    "__original-animation-1.bin",
+    "__original-animation-2.bin"
+  ],
+  "subMetas": {
+    "82ee2": {
+      "importer": "gltf-animation",
+      "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@82ee2",
+      "displayName": "",
+      "id": "82ee2",
+      "name": "attack.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.2666666507720947
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "3e9ca": {
+      "importer": "gltf-animation",
+      "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@3e9ca",
+      "displayName": "",
+      "id": "3e9ca",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 1,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.2333333492279053
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "1965b": {
+      "importer": "gltf-animation",
+      "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@1965b",
+      "displayName": "",
+      "id": "1965b",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 2,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.1833332777023315
+        },
+        "events": []
+      },
+      "ver": "1.0.18",
+      "imported": true,
+      "files": [
+        ".bin"
+      ],
+      "subMetas": {}
+    },
+    "761f8": {
+      "importer": "gltf-skeleton",
+      "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@761f8",
+      "displayName": "",
+      "id": "761f8",
+      "name": "DeformationSystem.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 37
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f8048": {
+      "importer": "gltf-scene",
+      "uuid": "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@f8048",
+      "displayName": "",
+      "id": "f8048",
+      "name": "Skeleton_melee_anim.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "animationImportSettings": [
+      {
+        "name": "skeleton_attack",
+        "duration": 1.2666666507720947,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "attack",
+            "from": 0,
+            "to": 1.2666666507720947,
+            "wrapMode": 2,
+            "previousId": "82ee2"
+          }
+        ]
+      },
+      {
+        "name": "skeleton_die",
+        "duration": 1.2333333492279053,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "die",
+            "from": 0,
+            "to": 1.2333333492279053,
+            "wrapMode": 2,
+            "previousId": "3e9ca"
+          }
+        ]
+      },
+      {
+        "name": "skeleton_walk",
+        "duration": 1.1833332777023315,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "run",
+            "from": 0,
+            "to": 1.1833332777023315,
+            "wrapMode": 2,
+            "previousId": "1965b"
+          }
+        ]
+      }
+    ],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [
+        "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@761f8"
+      ],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "a59e8de1-ba9c-4f63-a3ab-b628bbfc2119@f8048"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "encode": false,
+      "compress": true
+    }
+  }
+}

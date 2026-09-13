@@ -1,0 +1,81 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "951ae37f-95cd-4b3e-88e7-9efdb4fb9df3",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {},
+    {}
+  ],
+  "_states": [
+    {},
+    {}
+  ],
+  "_props": [
+    {
+      "mainTexture": {
+        "__uuid__": "555090a3-c2ad-468c-9fea-10bc680d6c2a@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "colorId": 0,
+      "getHit": 0,
+      "lightStrength": 0.3,
+      "smoothness": 0.25,
+      "useAlphaMask": 1,
+      "colorNone": {
+        "__type__": "cc.Color",
+        "r": 196,
+        "g": 41,
+        "b": 246,
+        "a": 255
+      },
+      "noneIntensity": 1,
+      "colorGreen": {
+        "__type__": "cc.Color",
+        "r": 58,
+        "g": 255,
+        "b": 128,
+        "a": 255
+      },
+      "greenIntensity": 1.281111,
+      "colorBlue": {
+        "__type__": "cc.Color",
+        "r": 30,
+        "g": 175,
+        "b": 255,
+        "a": 255
+      },
+      "blueIntensity": 1.629706,
+      "colorYellow": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 179,
+        "b": 53,
+        "a": 255
+      },
+      "yellowIntensity": 3.169811,
+      "colorOrange": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 98,
+        "b": 0,
+        "a": 255
+      },
+      "orangeIntensity": 3.396226,
+      "colorRed": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 72,
+        "b": 72,
+        "a": 255
+      },
+      "redIntensity": 1.666178
+    },
+    {}
+  ]
+}

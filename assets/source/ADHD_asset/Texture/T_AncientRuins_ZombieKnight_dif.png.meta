@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff@6c48a",
+      "displayName": "T_AncientRuins_ZombieKnight_dif",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff@f9941",
+      "displayName": "T_AncientRuins_ZombieKnight_dif",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 64,
+        "offsetY": 102,
+        "trimX": 389,
+        "trimY": 67,
+        "width": 374,
+        "height": 686,
+        "rawWidth": 1024,
+        "rawHeight": 1024,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -187,
+            -343,
+            0,
+            187,
+            -343,
+            0,
+            -187,
+            343,
+            0,
+            187,
+            343,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            389,
+            957,
+            763,
+            957,
+            389,
+            271,
+            763,
+            271
+          ],
+          "nuv": [
+            0.3798828125,
+            0.2646484375,
+            0.7451171875,
+            0.2646484375,
+            0.3798828125,
+            0.9345703125,
+            0.7451171875,
+            0.9345703125
+          ],
+          "minPos": [
+            -187,
+            -343,
+            0
+          ],
+          "maxPos": [
+            187,
+            343,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "f31929d4-0c77-4dc8-b5f0-f2ee0fefc9ff@6c48a"
+  }
+}

@@ -1,0 +1,114 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/VFX_Sprite_Unlit.shadergraph
+// (Sprite Unlit sub target - same graph as VFX_Unlit_Clipping, but vertex color is
+//  multiplied in like Unity's sprite pipeline does, and back faces are kept.)
+//   tex       = SampleTexture2D(_BaseMap, uv0)
+//   BaseColor = tex * _Tint * vertexColor ; Alpha = tex.a ; AlphaClipThreshold = 0.5
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: &props
+        mainTexture:    { value: grey, editor: { displayName: Base Map } }
+        tilingOffset:   { value: [1.0, 1.0, 0.0, 0.0] }
+        tint:           { value: [1.0, 1.0, 1.0, 1.0], editor: { type: color } }
+        alphaThreshold: { value: 0.5, target: params.x, editor: { slide: true, range: [0, 1], step: 0.001 } }
+  - name: add
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one
+      properties: *props
+}%
+
+CCProgram unlit-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/fog-vs>
+
+  out vec2 v_uv;
+
+  #if USE_VERTEX_COLOR
+    in lowp vec4 a_color;
+    out lowp vec4 v_color;
+  #endif
+
+  uniform TexCoords {
+    vec4 tilingOffset;
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld;
+    CCGetWorldMatrix(matWorld);
+
+    v_uv = a_texCoord * tilingOffset.xy + tilingOffset.zw;
+
+    #if USE_VERTEX_COLOR
+      v_color = a_color;
+    #endif
+
+    CC_TRANSFER_FOG(matWorld * In.position);
+    return cc_matProj * (cc_matView * matWorld) * In.position;
+  }
+}%
+
+CCProgram unlit-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+
+  #if USE_VERTEX_COLOR
+    in lowp vec4 v_color;
+  #endif
+
+  uniform Constant {
+    vec4 tint;
+    vec4 params;   // x: alphaThreshold
+  };
+
+  vec4 frag () {
+    vec4 tex = texture(mainTexture, v_uv);
+    tex.rgb = SRGBToLinear(tex.rgb);
+
+    vec4 o = tex * tint;
+
+    #if USE_VERTEX_COLOR
+      o.rgb *= SRGBToLinear(v_color.rgb);
+      o.a *= v_color.a;
+    #endif
+
+    if (o.a < params.x) discard;
+
+    CC_APPLY_FOG(o);
+    return CCFragOutput(o);
+  }
+}%

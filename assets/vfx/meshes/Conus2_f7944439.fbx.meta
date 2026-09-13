@@ -1,0 +1,96 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "06f637e4-e837-4699-9974-7b2a6919d03d",
+  "files": [],
+  "subMetas": {
+    "84474": {
+      "importer": "gltf-scene",
+      "uuid": "06f637e4-e837-4699-9974-7b2a6919d03d@84474",
+      "displayName": "",
+      "id": "84474",
+      "name": "Conus2_f7944439.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ac737": {
+      "importer": "gltf-mesh",
+      "uuid": "06f637e4-e837-4699-9974-7b2a6919d03d@ac737",
+      "displayName": "",
+      "id": "ac737",
+      "name": "Conus.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 32
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "06f637e4-e837-4699-9974-7b2a6919d03d@ac737"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "06f637e4-e837-4699-9974-7b2a6919d03d@84474"
+      ]
+    },
+    "meshCompress": {
+      "compress": true,
+      "enable": true
+    },
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "addVertexColor": false,
+    "generateLightmapUVNode": false,
+    "meshOptimizer": {
+      "enable": false,
+      "algorithm": "simplify",
+      "simplifyOptions": {
+        "targetRatio": 1,
+        "enableSmartLink": true,
+        "agressiveness": 7,
+        "maxIterationCount": 100
+      }
+    }
+  }
+}

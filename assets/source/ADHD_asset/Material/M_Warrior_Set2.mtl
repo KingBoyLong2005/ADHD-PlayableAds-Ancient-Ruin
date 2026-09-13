@@ -1,0 +1,26 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "0c67953b-87b0-4619-8c9c-5883cce263fa",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {}
+  ],
+  "_states": [
+    {}
+  ],
+  "_props": [
+    {
+      "mainTexture": {
+        "__uuid__": "147af4d1-a0af-4396-86a5-c961ba3ef9f8@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "getHit": 0
+    }
+  ]
+}

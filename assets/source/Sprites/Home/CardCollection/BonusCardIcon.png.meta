@@ -1,0 +1,134 @@
+{
+  "ver": "1.0.27",
+  "importer": "image",
+  "imported": true,
+  "uuid": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d@6c48a",
+      "displayName": "BonusCardIcon",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "imageUuidOrDatabaseUri": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d",
+        "isUuid": true,
+        "visible": false,
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d@f9941",
+      "displayName": "BonusCardIcon",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 3,
+        "offsetY": 1,
+        "trimX": 6,
+        "trimY": 0,
+        "width": 1078,
+        "height": 727,
+        "rawWidth": 1084,
+        "rawHeight": 729,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -539,
+            -363.5,
+            0,
+            539,
+            -363.5,
+            0,
+            -539,
+            363.5,
+            0,
+            539,
+            363.5,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            6,
+            729,
+            1084,
+            729,
+            6,
+            2,
+            1084,
+            2
+          ],
+          "nuv": [
+            0.005535055350553505,
+            0.0027434842249657062,
+            1,
+            0.0027434842249657062,
+            0.005535055350553505,
+            1,
+            1,
+            1
+          ],
+          "minPos": [
+            -539,
+            -363.5,
+            0
+          ],
+          "maxPos": [
+            539,
+            363.5,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "type": "sprite-frame",
+    "hasAlpha": true,
+    "fixAlphaTransparencyArtifacts": false,
+    "redirect": "dacad8f5-e8ab-4955-9dcd-c816a6fe6c3d@6c48a"
+  }
+}

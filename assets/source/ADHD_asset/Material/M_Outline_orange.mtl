@@ -1,0 +1,29 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "7de04088-5f48-4226-afd2-36bb39df7ce7",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {}
+  ],
+  "_states": [
+    {}
+  ],
+  "_props": [
+    {
+      "outlineWidth": 0.02,
+      "outlineColor": {
+        "__type__": "cc.Vec4",
+        "x": 22.627417,
+        "y": 0.31546342,
+        "z": 0,
+        "w": 1
+      }
+    }
+  ]
+}

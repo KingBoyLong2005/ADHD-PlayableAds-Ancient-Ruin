@@ -1,0 +1,80 @@
+{
+  "ver": "2.3.14",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "a0b70192-44e1-418f-8496-0f671f9c4586",
+  "files": [],
+  "subMetas": {
+    "c4192": {
+      "importer": "gltf-mesh",
+      "uuid": "a0b70192-44e1-418f-8496-0f671f9c4586@c4192",
+      "displayName": "",
+      "id": "c4192",
+      "name": "Mesh.013.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 156
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a3324": {
+      "importer": "gltf-scene",
+      "uuid": "a0b70192-44e1-418f-8496-0f671f9c4586@a3324",
+      "displayName": "",
+      "id": "a3324",
+      "name": "Warrior_weapon_model.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "a0b70192-44e1-418f-8496-0f671f9c4586@c4192"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "a0b70192-44e1-418f-8496-0f671f9c4586@a3324"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true,
+      "encode": false
+    }
+  }
+}

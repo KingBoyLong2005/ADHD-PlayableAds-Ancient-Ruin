@@ -1,0 +1,81 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Decal.shadergraph
+// Graph logic:
+//   tex       = SampleTexture2D(_Base_Map, uv0)
+//   BaseColor = tex * _Light_Strength ; Alpha = tex.a
+//
+// NOTE: the Unity version used the URP *Decal* sub target (projected onto the depth
+// buffer). Cocos has no decal projector, so this is a plain transparent overlay:
+// put the material on a quad/plane laid slightly above the surface, or on the mesh
+// that should receive the decal.
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: decal-vs:vert
+      frag: decal-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: &props
+        mainTexture:   { value: grey, editor: { displayName: Base Map } }
+        tilingOffset:  { value: [1.0, 1.0, 0.0, 0.0] }
+        lightStrength: { value: 0.3, target: params.x, editor: { displayName: Light Strength, slide: true, range: [0, 4], step: 0.001 } }
+        opacity:       { value: 1.0, target: params.y, editor: { slide: true, range: [0, 1], step: 0.001 } }
+}%
+
+CCProgram decal-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/fog-vs>
+
+  out vec2 v_uv;
+
+  uniform TexCoords {
+    vec4 tilingOffset;
+  };
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld;
+    CCGetWorldMatrix(matWorld);
+
+    v_uv = a_texCoord * tilingOffset.xy + tilingOffset.zw;
+
+    CC_TRANSFER_FOG(matWorld * In.position);
+    return cc_matProj * (cc_matView * matWorld) * In.position;
+  }
+}%
+
+CCProgram decal-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+
+  uniform Constant {
+    vec4 params;   // x: lightStrength, y: opacity
+  };
+
+  vec4 frag () {
+    vec4 tex = texture(mainTexture, v_uv);
+    tex.rgb = SRGBToLinear(tex.rgb);
+
+    vec4 o = vec4(tex.rgb * params.x, tex.a * params.y);
+
+    CC_APPLY_FOG(o);
+    return CCFragOutput(o);
+  }
+}%

@@ -1,0 +1,175 @@
+// Ported from Unity URP ShaderGraph: _DangerDungeon/Shaders/Lit_Environment_Basic.shadergraph
+// (includes the FakeBottomShadow.shadersubgraph inlined)
+// Graph logic:
+//   tex          = SampleTexture2D(_Base_Map, uv0)
+//   switchColor  = ColorSwitch4(_Color_ID) -> 0: _Tint, 1: _Easy, 2: _Medium, 3: _Hard
+//   tintMask     = lerp(1, tex.a, _Use_Alpha_Mask)
+//   base         = lerp(tex, switchColor * tex, tintMask)
+//   bottomShadow = lerp(1, smoothstep(0, _Max, objectPos.y), _fakeShadow)   // FakeBottomShadow subgraph
+//   final        = bottomShadow * base
+//   BaseColor    = final ; Emission = final * _Light_Strength
+//   Alpha        = tex.a, clipped against _AlphaClipping
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: standard-vs
+      frag: standard-fs
+      properties: &props
+        tilingOffset:   { value: [1.0, 1.0, 0.0, 0.0] }
+        mainTexture:    { value: grey, editor: { displayName: BaseMap } }
+        colorId:        { value: 0.0, target: params.x, editor: { displayName: Color ID, slide: true, range: [0, 3], step: 1 } }
+        lightStrength:  { value: 0.3, target: params.y, editor: { displayName: Light Strength, slide: true, range: [0, 4], step: 0.001 } }
+        smoothness:     { value: 0.25, target: params.z, editor: { slide: true, range: [0, 1], step: 0.001 } }
+        useAlphaMask:   { value: 0.0, target: params.w, editor: { displayName: Use Alpha Mask, slide: true, range: [0, 1], step: 1 } }
+        fakeShadow:     { value: 0.0, target: params2.x, editor: { displayName: Fake Bottom Shadow, slide: true, range: [0, 1], step: 0.001 } }
+        shadowMaxHeight: { value: 0.3, target: params2.y, editor: { displayName: Fake Shadow Height, slide: true, range: [0, 10], step: 0.001 } }
+        alphaThreshold: { value: 0.5, target: params2.z, editor: { parent: USE_ALPHA_TEST, slide: true, range: [0, 1], step: 0.001 } }
+        tint:           { value: [0.0, 0.0, 0.0, 1.0], editor: { type: color } }
+        colorEasy:      { value: [0.976471, 0.792157, 0.454902, 1.0], editor: { displayName: Easy, type: color } }
+        colorMedium:    { value: [0.568627, 0.788235, 0.666667, 1.0], editor: { displayName: Medium, type: color } }
+        colorHard:      { value: [0.533333, 0.152941, 0.152941, 0.0], editor: { displayName: Hard, type: color } }
+    - &shadow-caster
+      vert: shadow-caster-vs
+      frag: shadow-caster-fs
+      phase: shadow-caster
+      propertyIndex: 0
+      rasterizerState:
+        cullMode: front
+}%
+
+CCProgram shared-ubos %{
+  uniform Constants {
+    vec4 tilingOffset;
+    vec4 params;   // x: colorId, y: lightStrength, z: smoothness, w: useAlphaMask
+    vec4 params2;  // x: fakeShadow, y: shadowMaxHeight, z: alphaThreshold
+    vec4 tint;
+    vec4 colorEasy;
+    vec4 colorMedium;
+    vec4 colorHard;
+  };
+}%
+
+CCProgram macro-remapping %{
+  #pragma define-meta USE_TWOSIDE
+  #pragma define-meta USE_ALPHA_TEST
+  #define CC_SURFACES_USE_TWO_SIDED USE_TWOSIDE
+  // needed by the FakeBottomShadow part (object space Y)
+  #define CC_SURFACES_TRANSFER_LOCAL_POS 1
+}%
+
+CCProgram surface-vertex %{
+  #define CC_SURFACES_VERTEX_MODIFY_UV
+  void SurfacesVertexModifyUV(inout SurfacesStandardVertexIntermediate In)
+  {
+    In.texCoord = In.texCoord * tilingOffset.xy + tilingOffset.zw;
+  }
+}%
+
+CCProgram surface-fragment %{
+  uniform sampler2D mainTexture;
+
+  // Unity CustomFunction "ColorSwitch4": Color0 is overridden by the Tint input
+  vec4 ColorSwitch4(float index)
+  {
+    int i = int(index + 0.5);
+    vec4 o = tint;
+    if (i == 1) { o = colorEasy; }
+    else if (i == 2) { o = colorMedium; }
+    else if (i >= 3) { o = colorHard; }
+    return o;
+  }
+
+  // FakeBottomShadow.shadersubgraph: lerp(1, smoothstep(Min, Height, objectPos.y), strength)
+  float FakeBottomShadow()
+  {
+    float localY = FSInput_localPos.y;
+    return mix(1.0, smoothstep(0.0, max(params2.y, 1e-4), localY), params2.x);
+  }
+
+  vec4 EvaluateFinalColor()
+  {
+    vec4 tex = texture(mainTexture, FSInput_texcoord);
+    tex.rgb = SRGBToLinear(tex.rgb);
+
+    float tintMask = mix(1.0, tex.a, params.w);
+    vec4 base = mix(tex, ColorSwitch4(params.x) * tex, tintMask);
+
+    vec4 final = base * FakeBottomShadow();
+    final.a = tex.a;
+    return final;
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_BASECOLOR_AND_TRANSPARENCY
+  vec4 SurfacesFragmentModifyBaseColorAndTransparency()
+  {
+    vec4 color = EvaluateFinalColor();
+    #if USE_ALPHA_TEST
+      if (color.a < params2.z) discard;
+    #endif
+    return color;
+  }
+
+  #define CC_SURFACES_FRAGMENT_ALPHA_CLIP_ONLY
+  void SurfacesFragmentAlphaClipOnly()
+  {
+    #if USE_ALPHA_TEST
+      if (texture(mainTexture, FSInput_texcoord).a < params2.z) discard;
+    #endif
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_EMISSIVE
+  vec3 SurfacesFragmentModifyEmissive()
+  {
+    return EvaluateFinalColor().rgb * params.y;
+  }
+
+  #define CC_SURFACES_FRAGMENT_MODIFY_PBRPARAMS
+  vec4 SurfacesFragmentModifyPBRParams()
+  {
+    return vec4(1.0, clamp(1.0 - params.z, 0.02, 1.0), 0.0, 0.5);
+  }
+}%
+
+CCProgram standard-vs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surface-vertex>
+  #include <surfaces/includes/standard-vs>
+  #include <shading-entries/main-functions/render-to-scene/vs>
+}%
+
+CCProgram standard-fs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/common-macros>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <lighting-models/includes/standard>
+  #include <surfaces/includes/standard-fs>
+  #include <shading-entries/main-functions/render-to-scene/fs>
+}%
+
+CCProgram shadow-caster-vs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-vs>
+  #include <shared-ubos>
+  #include <surface-vertex>
+  #include <shading-entries/main-functions/render-to-shadowmap/vs>
+}%
+
+CCProgram shadow-caster-fs %{
+  precision highp float;
+  #include <macro-remapping>
+  #include <surfaces/effect-macros/render-to-shadowmap>
+  #include <surfaces/includes/common-fs>
+  #include <shared-ubos>
+  #include <surface-fragment>
+  #include <shading-entries/main-functions/render-to-shadowmap/fs>
+}%

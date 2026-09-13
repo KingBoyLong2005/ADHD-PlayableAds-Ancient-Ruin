@@ -1,0 +1,46 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "ab50942c-190b-45bd-9de7-42127730d28d",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {}
+  ],
+  "_states": [
+    {}
+  ],
+  "_props": [
+    {
+      "baseMap": {
+        "__uuid__": "a939f0b6-e429-4ae4-a46e-be0fd433ab4d@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "normalMap": {
+        "__uuid__": "b77a8190-f447-49df-ad05-5b493fb8a421@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "tillingOffset": {
+        "__type__": "cc.Vec4",
+        "x": 1,
+        "y": 1,
+        "z": 0,
+        "w": 0
+      },
+      "tint": {
+        "__type__": "cc.Vec4",
+        "x": 16.948378,
+        "y": 5.501568,
+        "z": 0,
+        "w": 1
+      },
+      "refractionAmount": 0.01,
+      "fresnelPower": 1.92,
+      "fresnelStep": 0.35
+    }
+  ]
+}

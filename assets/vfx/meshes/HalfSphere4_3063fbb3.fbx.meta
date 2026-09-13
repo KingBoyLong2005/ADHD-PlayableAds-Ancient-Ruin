@@ -1,0 +1,82 @@
+{
+  "ver": "2.3.14",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "2217c313-20cd-4752-bce5-5e107ae47588",
+  "files": [],
+  "subMetas": {
+    "ed341": {
+      "importer": "gltf-mesh",
+      "uuid": "2217c313-20cd-4752-bce5-5e107ae47588@ed341",
+      "displayName": "",
+      "id": "ed341",
+      "name": "Sphere.001.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 380
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f509b": {
+      "importer": "gltf-scene",
+      "uuid": "2217c313-20cd-4752-bce5-5e107ae47588@f509b",
+      "displayName": "",
+      "id": "f509b",
+      "name": "HalfSphere4_3063fbb3.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "2217c313-20cd-4752-bce5-5e107ae47588@ed341"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "2217c313-20cd-4752-bce5-5e107ae47588@f509b"
+      ]
+    },
+    "meshCompress": {
+      "enable": true,
+      "compress": true
+    }
+  }
+}
