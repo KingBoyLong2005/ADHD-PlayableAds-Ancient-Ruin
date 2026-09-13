@@ -1,2 +1,85 @@
-# Google App Engine generated folder
-appengine-generated/
+# ==========================================
+# Cocos Creator Build & Temp Directories
+# ==========================================
+# Các thư mục tạm và build do Cocos Creator tự sinh ra
+/build/
+/temp/
+/library/
+/local/
+/profiles/
+/.cocos/
+
+# Thư mục build và simulator của mảng Native (C++/Android/iOS)
+/native/build/
+/native/simulator/
+
+# ------------------------------------------
+# IDE & Code Editor Files
+# ------------------------------------------
+# Visual Studio Code (giữ lại các file config dùng chung nếu cần)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains IDEs (WebStorm, IntelliJ IDEA, v.v.)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Visual Studio (Khi build C++ Native)
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+
+# Xcode (macOS / iOS)
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworktypedata
+
+# ------------------------------------------
+# Dependency & Node Package Managers
+# ------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ------------------------------------------
+# OS & System Generated Files
+# ------------------------------------------
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ------------------------------------------
+# Environment & Sensitive Credentials
+# ------------------------------------------
+# Không đưa key, keystore, file môi trường lên Git
+.env
+.env.local
+*.pem
+*.key
+*.p12
+*.keystore
+*.jks
